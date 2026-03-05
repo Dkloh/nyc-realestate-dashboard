@@ -1,4 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import { SaleRecord } from "@/lib/api";
+
+type SortKey = "sales" | "median";
 
 function formatCurrency(n: number) {
   return new Intl.NumberFormat("en-US", {
@@ -9,6 +14,7 @@ function formatCurrency(n: number) {
 }
 
 export default function NeighborhoodTable({ sales }: { sales: SaleRecord[] }) {
+  const [sortBy, setSortBy] = useState<SortKey>("sales");
   const byNeighborhood: Record<string, number[]> = {};
 
   const allPrices = sales
@@ -36,12 +42,36 @@ export default function NeighborhoodTable({ sales }: { sales: SaleRecord[] }) {
       avg: Math.round(prices.reduce((a, b) => a + b, 0) / prices.length),
       median: prices.sort((a, b) => a - b)[Math.floor(prices.length / 2)],
     }))
-    .sort((a, b) => b.sales - a.sales)
+    .sort((a, b) => sortBy === "sales" ? b.sales - a.sales : b.median - a.median)
     .slice(0, 10);
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 border border-gray-800 mt-6">
-      <h2 className="text-white font-semibold mb-4">Top Neighborhoods by Sales Volume</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-white font-semibold">Top Neighborhoods</h2>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setSortBy("sales")}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+              sortBy === "sales"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+            }`}
+          >
+            By Volume
+          </button>
+          <button
+            onClick={() => setSortBy("median")}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+              sortBy === "median"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-800 text-gray-400 hover:bg-gray-700"
+            }`}
+          >
+            By Median Price
+          </button>
+        </div>
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -54,7 +84,10 @@ export default function NeighborhoodTable({ sales }: { sales: SaleRecord[] }) {
           </thead>
           <tbody>
             {rows.map((row) => (
-              <tr key={row.neighborhood} className="border-b border-gray-800 hover:bg-gray-800 transition-colors">
+              <tr
+                key={row.neighborhood}
+                className="border-b border-gray-800 hover:bg-gray-800 transition-colors"
+              >
                 <td className="py-3 pr-4 text-white font-medium">{row.neighborhood}</td>
                 <td className="py-3 pr-4 text-right text-gray-300">{row.sales}</td>
                 <td className="py-3 pr-4 text-right text-gray-300">{formatCurrency(row.avg)}</td>
