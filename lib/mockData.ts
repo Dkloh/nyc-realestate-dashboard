@@ -1,0 +1,14 @@
+import { SaleRecord } from "./api";
+
+export const mockSales: SaleRecord[] = [
+  { borough: "1", neighborhood: "UPPER WEST SIDE", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "101 WEST 79 STREET", zip_code: "10024", sale_price: "1250000", sale_date: "2025-01-15T00:00:00.000", gross_square_feet: "950", residential_units: "1" },
+  { borough: "1", neighborhood: "UPPER EAST SIDE", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "420 EAST 72 STREET", zip_code: "10021", sale_price: "2100000", sale_date: "2025-01-20T00:00:00.000", gross_square_feet: "1400", residential_units: "1" },
+  { borough: "1", neighborhood: "CHELSEA", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "245 WEST 25 STREET", zip_code: "10001", sale_price: "875000", sale_date: "2025-02-01T00:00:00.000", gross_square_feet: "720", residential_units: "1" },
+  { borough: "1", neighborhood: "TRIBECA", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "10 LEONARD STREET", zip_code: "10013", sale_price: "3800000", sale_date: "2025-02-10T00:00:00.000", gross_square_feet: "2200", residential_units: "1" },
+  { borough: "1", neighborhood: "HARLEM", building_class_category: "01 ONE FAMILY DWELLINGS", address: "18 WEST 130 STREET", zip_code: "10037", sale_price: "620000", sale_date: "2025-02-14T00:00:00.000", gross_square_feet: "1800", residential_units: "1" },
+  { borough: "1", neighborhood: "FINANCIAL DISTRICT", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "75 WALL STREET", zip_code: "10005", sale_price: "1450000", sale_date: "2025-02-20T00:00:00.000", gross_square_feet: "1100", residential_units: "1" },
+  { borough: "1", neighborhood: "GREENWICH VILLAGE", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "33 WEST 8 STREET", zip_code: "10011", sale_price: "1875000", sale_date: "2025-03-01T00:00:00.000", gross_square_feet: "1250", residential_units: "1" },
+  { borough: "1", neighborhood: "UPPER WEST SIDE", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "350 WEST END AVENUE", zip_code: "10024", sale_price: "950000", sale_date: "2025-03-05T00:00:00.000", gross_square_feet: "800", residential_units: "1" },
+  { borough: "1", neighborhood: "MIDTOWN", building_class_category: "13 CONDOS - ELEVATOR APARTMENTS", address: "500 PARK AVENUE", zip_code: "10022", sale_price: "4200000", sale_date: "2025-03-10T00:00:00.000", gross_square_feet: "2800", residential_units: "1" },
+  { borough: "1", neighborhood: "INWOOD", building_class_category: "01 ONE FAMILY DWELLINGS", address: "85 PAYSON AVENUE", zip_code: "10034", sale_price: "480000", sale_date: "2025-03-12T00:00:00.000", gross_square_feet: "1600", residential_units: "1" },
+];
