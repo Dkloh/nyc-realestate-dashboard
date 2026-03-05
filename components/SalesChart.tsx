@@ -31,10 +31,13 @@ export default function SalesChart({ sales }: { sales: SaleRecord[] }) {
     byMonth[month].push(price);
   });
 
-  const data = Object.entries(byMonth).map(([month, prices]) => ({
-    month,
-    avg: Math.round(prices.reduce((a, b) => a + b, 0) / prices.length),
-  }));
+  const data = Object.entries(byMonth)
+    .map(([month, prices]) => ({
+      month,
+      avg: Math.round(prices.reduce((a, b) => a + b, 0) / prices.length),
+      sortKey: new Date(month).getTime(),
+    }))
+    .sort((a, b) => a.sortKey - b.sortKey);
 
   return (
     <div className="bg-gray-900 rounded-xl p-6 border border-gray-800 mt-6">
