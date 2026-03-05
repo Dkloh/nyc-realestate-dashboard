@@ -27,7 +27,11 @@ export async function getSalesByBorough(borough: string): Promise<SaleRecord[]> 
   }
 
   const code = BOROUGH_CODES[borough];
-  const url = `https://data.cityofnewyork.us/resource/usep-8jbt.json?borough=${code}&$where=sale_price>'10000'&$limit=1000&$order=sale_date%20DESC`;
+  const oneYearAgo = new Date();
+oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+const dateFilter = oneYearAgo.toISOString().split("T")[0];
+
+const url = `https://data.cityofnewyork.us/resource/usep-8jbt.json?borough=${code}&$where=sale_price>'10000' AND sale_date>'${dateFilter}T00:00:00.000'&$limit=5000&$order=sale_date%20DESC`;
 
   const res = await fetch(url, { next: { revalidate: 3600 } });
   if (!res.ok) throw new Error("Failed to fetch sales data");
