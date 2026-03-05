@@ -40,17 +40,25 @@ export function calcStats(sales: SaleRecord[]) {
     .filter((p) => p > 10000)
     .sort((a, b) => a - b);
 
+  // IQR outlier filtering
+  const q1 = prices[Math.floor(prices.length * 0.25)];
+  const q3 = prices[Math.floor(prices.length * 0.75)];
+  const iqr = q3 - q1;
+  const lower = q1 - 1.5 * iqr;
+  const upper = q3 + 1.5 * iqr;
+  const filtered = prices.filter((p) => p >= lower && p <= upper);
+
   const sqftPrices = sales
     .filter((s) => parseInt(s.gross_square_feet) > 0)
     .map((s) => parseInt(s.sale_price) / parseInt(s.gross_square_feet))
-    .filter((p) => p > 0);
+    .filter((p) => p > 0 && p < 10000);
 
-  const median = prices[Math.floor(prices.length / 2)] ?? 0;
+  const median = filtered[Math.floor(filtered.length / 2)] ?? 0;
   const avgPsf = sqftPrices.reduce((a, b) => a + b, 0) / sqftPrices.length || 0;
 
   return {
     median,
     avgPsf,
-    totalSales: prices.length,
+    totalSales: filtered.length,
   };
 }

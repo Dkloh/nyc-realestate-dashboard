@@ -11,9 +11,19 @@ function formatCurrency(n: number) {
 export default function NeighborhoodTable({ sales }: { sales: SaleRecord[] }) {
   const byNeighborhood: Record<string, number[]> = {};
 
+  const allPrices = sales
+    .map((s) => parseInt(s.sale_price))
+    .filter((p) => p > 10000)
+    .sort((a, b) => a - b);
+
+  const q1 = allPrices[Math.floor(allPrices.length * 0.25)];
+  const q3 = allPrices[Math.floor(allPrices.length * 0.75)];
+  const iqr = q3 - q1;
+  const upper = q3 + 1.5 * iqr;
+
   sales.forEach((s) => {
     const price = parseInt(s.sale_price);
-    if (price < 10000) return;
+    if (price < 10000 || price > upper) return;
     const n = s.neighborhood;
     if (!byNeighborhood[n]) byNeighborhood[n] = [];
     byNeighborhood[n].push(price);
