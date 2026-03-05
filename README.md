@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NYC Real Estate Market Dashboard
 
-## Getting Started
+A full stack web application that visualizes NYC real estate sales data using the NYC Open Data API.
 
-First, run the development server:
+Built to demonstrate real-world data analysis skills combined with 10+ years of professional real estate experience.
 
+## Live Demo
+[nyc-realestate-dashboard.vercel.app](https://nyc-realestate-dashboard.vercel.app)
+
+## Features
+- Browse market data by borough (Manhattan, Brooklyn, Queens, Bronx, Staten Island)
+- Key stats: median sale price, average price per square foot, total sales
+- Line chart showing average sale price trends over the last 12 months
+- Neighborhood breakdown table with sort toggle (by sales volume or median price)
+- IQR-based outlier filtering to remove anomalous transactions
+- Rolling 12-month date window — always current, no manual updates needed
+
+## Tech Stack
+- **Framework:** Next.js 16 + TypeScript
+- **Styling:** Tailwind CSS
+- **Charts:** Recharts
+- **Data:** NYC Open Data — Rolling Calendar Sales API
+- **Deployment:** Vercel
+
+## Data Notes
+- Source: [NYC Citywide Rolling Calendar Sales](https://data.cityofnewyork.us/City-Government/NYC-Citywide-Rolling-Calendar-Sales/usep-8jbt)
+- Filters out non-arm's length transfers (sales under $10,000)
+- Applies IQR outlier detection to remove statistical anomalies
+- NYC Open Data has a 1-3 month reporting lag, so the most recent month shown may not reflect current market conditions
+
+## Local Development
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Author
+Derek — [GitHub](https://github.com/Dkloh) · [LinkedIn](https://linkedin.com/in/)
