@@ -45,7 +45,7 @@ export default function SalesChart({ sales }: { sales: SaleRecord[] }) {
           <XAxis dataKey="month" stroke="#9CA3AF" tick={{ fontSize: 12 }} />
           <YAxis stroke="#9CA3AF" tickFormatter={formatPrice} tick={{ fontSize: 12 }} />
           <Tooltip
-            formatter={(value: number) => [`$${value.toLocaleString()}`, "Avg Price"]}
+            formatter={(value: number | undefined) => [`$${(value ?? 0).toLocaleString()}`, "Avg Price"]}
             contentStyle={{ backgroundColor: "#111827", border: "1px solid #374151" }}
             labelStyle={{ color: "#F9FAFB" }}
           />
